@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="en" class=" js flexbox flexboxlegacy canvas canvastext webgl no-touch geolocation postmessage no-websqldatabase indexeddb hashchange history draganddrop websockets rgba hsla multiplebgs backgroundsize borderimage borderradius boxshadow textshadow opacity cssanimations csscolumns cssgradients no-cssreflections csstransforms csstransforms3d csstransitions fontface generatedcontent video audio localstorage sessionstorage webworkers no-applicationcache svg inlinesvg smil svgclippaths" style=""><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta http-equiv="Cache-Control" content="no-siteapp">
+		<meta name="renderer" content="webkit">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="keywords" content="Editor.md,editor,Markdown Editor,Markdown,编辑器,Markdown编辑器,Markdown在线编辑器,在线编辑器,开源编辑器,开源Markdown编辑器">
+        <meta name="description" content="Editor.md: a simple online markdown editor. 开源在线 Markdown 编辑器">
+	    <meta name="author" content="pandao, pandao@vip.qq.com">
+        <title>Editor.md - Open source online Markdown editor.</title>
+        <link rel="shortcut icon" href="https://pandao.github.io/editor.md/favicon.ico" type="image/x-icon">
+        <link rel="stylesheet" type="text/css" href="Editor.md%20-%20Open%20source%20online%20Markdown%20editor_files/planeui.min.css">
+        <link rel="stylesheet" href="Editor.md%20-%20Open%20source%20online%20Markdown%20editor_files/editormd.min.css">
+        <link rel="stylesheet" type="text/css" href="Editor.md%20-%20Open%20source%20online%20Markdown%20editor_files/index.css">
+    <link type="text/css" rel="stylesheet" href="Editor.md%20-%20Open%20source%20online%20Markdown%20editor_files/codemirror.min.css"><link type="text/css" rel="stylesheet" href="Editor.md%20-%20Open%20source%20online%20Markdown%20editor_files/dialog.css"><link type="text/css" rel="stylesheet" href="Editor.md%20-%20Open%20source%20online%20Markdown%20editor_files/matchesonscrollbar.css"><link type="text/css" rel="stylesheet" href="Editor.md%20-%20Open%20source%20online%20Markdown%20editor_files/foldgutter.css"><script id="-lib-codemirror-codemirror-min" type="text/javascript" src="Editor.md%20-%20Open%20source%20online%20Markdown%20editor_files/codemirror.min.js"></script><script id="-lib-codemirror-modes-min" type="text/javascript" src="Editor.md%20-%20Open%20source%20online%20Markdown%20editor_files/modes.min.js"></script><script id="-lib-codemirror-addons-min" type="text/javascript" src="Editor.md%20-%20Open%20source%20online%20Markdown%20editor_files/addons.min.js"></script><script id="-lib-marked-min" type="text/javascript" src="Editor.md%20-%20Open%20source%20online%20Markdown%20editor_files/marked.min.js"></script><script id="-lib-prettify-min" type="text/javascript" src="Editor.md%20-%20Open%20source%20online%20Markdown%20editor_files/prettify.min.js"></script><script id="-lib-raphael-min" type="text/javascript" src="Editor.md%20-%20Open%20source%20online%20Markdown%20editor_files/raphael.min.js"></script><script id="-lib-underscore-min" type="text/javascript" src="Editor.md%20-%20Open%20source%20online%20Markdown%20editor_files/underscore.min.js"></script><script id="-lib-flowchart-min" type="text/javascript" src="Editor.md%20-%20Open%20source%20online%20Markdown%20editor_files/flowchart.min.js"></script><script id="-lib-jquery-flowchart-min" type="text/javascript" src="Editor.md%20-%20Open%20source%20online%20Markdown%20editor_files/jquery.flowchart.min.js"></script><script id="-lib-sequence-diagram-min" type="text/javascript" src="Editor.md%20-%20Open%20source%20online%20Markdown%20editor_files/sequence-diagram.min.js"></script><link type="text/css" rel="stylesheet" href="Editor.md%20-%20Open%20source%20online%20Markdown%20editor_files/katex.min.css"><script id="-cdnjs-cloudflare-com-ajax-libs-KaTeX-0-3-0-katex-min" type="text/javascript" src="Editor.md%20-%20Open%20source%20online%20Markdown%20editor_files/katex.min.js"></script><script id="-lib-plugins-help-dialog-help-dialog" type="text/javascript" src="Editor.md%20-%20Open%20source%20online%20Markdown%20editor_files/help-dialog.js"></script></head>
+    <body style="">
+        <a name="top"></a>
+        <a href="#top" class="fa fa-arrow-circle-up fa-3x pui-text-blue-400" id="go-to-top" style="display: none;"></a>
+        <div class="pui-layout">
+            <header class="pui-bg-blue page-header">
+                <div class="pui-layout pui-layout-fixed pui-layout-fixed-1200 pui-layout-fixed-1360">
+                    <h1 class="pui-text-center pui-text-xxxxxl page-title animated zoomInDown">
+                        <a href="https://pandao.github.io/editor.md/index.html" class="pui-text-white">
+                            <i class="editormd-logo editormd-logo-2x"></i><strong>Editor.md</strong>
+                        </a>
+                    </h1>
+                    <p class="pui-text-center pui-text-xl animated zoomInDown">Open source online Markdown editor.</p>
+                    <menu class="pui-text-center page-menu animated zoomInDown">
+                        <ul class="pui-menu pui-menu-inline pui-menu-radius">
+                            <li>
+                                <a href="#download"><i class="fa fa-cloud-download"></i> Download</a>
+                            </li>
+                            <li>
+                                <a href="http://editor.md.ipandao.com/examples/index.html"><i class="fa fa-flask"></i> Examples <i class="pui-arrow-down"></i></a>
+                                <ul class="pui-menu pui-menu-dropdown pui-z-depth-2">
+                                    <li>
+                                        <a href="http://editor.md.ipandao.com/examples/simple.html">Simple example</a>
+                                    </li>
+                                    <li>
+                                        <a href="http://editor.md.ipandao.com/examples/full.html">Full example</a>
+                                    </li>
+                                    <li>
+                                        <a href="http://editor.md.ipandao.com/examples/html-preview-markdown-to-html.html">Markdown To HTML</a>
+                                    </li>
+                                    <li>
+                                        <a href="http://editor.md.ipandao.com/examples/form-get-value.html">Get value on Form</a>
+                                    </li>
+                                    <li class="has-submenu">
+                                        <a href="javascript:;">Markdown Extras</a>
+                                        <ul class="pui-menu pui-menu-dropdown pui-z-depth-2">
+                                            <li>
+                                                <a href="http://editor.md.ipandao.com/examples/toc.html">ToC (Table of Contents)</a>
+                                            </li>
+                                            <li>
+                                                <a href="http://editor.md.ipandao.com/examples/task-lists.html">GFM task lists</a>
+                                            </li>
+                                            <li>
+                                                <a href="http://editor.md.ipandao.com/examples/emoji.html">Emoji</a>
+                                            </li>
+                                            <li>
+                                                <a href="http://editor.md.ipandao.com/examples/@links.html">@Links</a>
+                                            </li>
+                                            <li>
+                                                <a href="http://editor.md.ipandao.com/examples/katex.html">TeX (KaTeX)</a>
+                                            </li>
+                                            <li>
+                                                <a href="http://editor.md.ipandao.com/examples/flowchart.html">FlowChart</a>
+                                            </li>
+                                            <li>
+                                                <a href="http://editor.md.ipandao.com/examples/sequence-diagram.html">Sequence diagram</a>
+                                            </li>
+                                            <li>
+                                                <a href="http://editor.md.ipandao.com/examples/html-tags-decode.html">HTML tags decode</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="has-submenu">
+                                        <a href="javascript:;">Custom Editor.md</a>
+                                        <ul class="pui-menu pui-menu-dropdown pui-z-depth-2">
+                                            <li>
+                                                <a href="http://editor.md.ipandao.com/examples/define-plugin.html">Define plugin</a>
+                                            </li>
+                                            <li>
+                                                <a href="http://editor.md.ipandao.com/examples/themes.html">Custom editor theme</a>
+                                            </li>
+                                            <li>
+                                                <a href="http://editor.md.ipandao.com/examples/custom-toolbar.html">Custom toolbar</a>
+                                            </li>
+                                            <li>
+                                                <a href="http://editor.md.ipandao.com/examples/custom-keyboard-shortcuts.html">Custom keyboard shortcuts</a>
+                                            </li>
+                                            <li>
+                                                <a href="http://editor.md.ipandao.com/examples/change-mode.html">Change mode</a>
+                                            </li>
+                                            <li>
+                                                <a href="http://editor.md.ipandao.com/examples/manually-load-modules.html">Manually load modules</a>
+                                            </li>
+                                            <li>
+                                                <a href="http://editor.md.ipandao.com/examples/multi-editormd.html">Multi Editor.md</a>
+                                            </li>
+                                            <li>
+                                                <a href="http://editor.md.ipandao.com/examples/readonly.html">Read only mode</a>
+                                            </li>
+                                            <li>
+                                                <a href="http://editor.md.ipandao.com/examples/code-fold.html">Code fold</a>
+                                            </li>
+                                            <li>
+                                                <a href="http://editor.md.ipandao.com/examples/sync-scrolling.html">Bisync / Single sync scrolling</a>
+                                            </li>
+                                            <li>
+                                                <a href="http://editor.md.ipandao.com/examples/external-use.html">External using method</a>
+                                            </li>
+                                            <li>
+                                                <a href="http://editor.md.ipandao.com/examples/multi-languages.html">Multi-languages</a>
+                                            </li>
+                                            <li>
+                                                <a href="http://editor.md.ipandao.com/examples/auto-height.html">Auto height</a>
+                                            </li>
+                                            <li>
+                                                <a href="http://editor.md.ipandao.com/examples/dynamic-create-editormd.html">Dynamic create Editor.md</a>
+                                            </li>
+                                            <li>
+                                                <a href="http://editor.md.ipandao.com/examples/search-replace.html">Search / Replace</a>
+                                            </li>
+                                            <li>
+                                                <a href="http://editor.md.ipandao.com/examples/set-get-replace-selection.html">Insert value, Set/Get/Replace selection text</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="has-submenu">
+                                        <a href="javascript:;">Event handle</a>
+                                        <ul class="pui-menu pui-menu-dropdown pui-z-depth-2">
+                                            <li>
+                                                <a href="http://editor.md.ipandao.com/examples/on-off.html">On / Off (bind/unbind)</a>
+                                            </li>
+                                            <li>
+                                                <a href="http://editor.md.ipandao.com/examples/onload.html">Onload</a>
+                                            </li>
+                                            <li>
+                                                <a href="http://editor.md.ipandao.com/examples/onchange.html">Onchange</a>
+                                            </li>
+                                            <li>
+                                                <a href="http://editor.md.ipandao.com/examples/onresize.html">Onresize</a>
+                                            </li>
+                                            <li>
+                                                <a href="http://editor.md.ipandao.com/examples/onfullscreen.html">Onfullscreen / OnfullscreenExit</a>
+                                            </li>
+                                            <li>
+                                                <a href="http://editor.md.ipandao.com/examples/onpreviewing-onpreviewed.html">Onpreviewing / Onpreviewed</a>
+                                            </li>
+                                            <li>
+                                                <a href="http://editor.md.ipandao.com/examples/onwatch-onunwatch.html">Onwatch / Onunwatch</a>
+                                            </li>
+                                            <li>
+                                                <a href="http://editor.md.ipandao.com/examples/onscroll-onpreviewscroll.html">Onscroll / Onpreviewscroll</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="has-submenu">
+                                        <a href="javascript:;">Image upload</a>
+                                        <ul class="pui-menu pui-menu-dropdown pui-z-depth-2">
+                                            <li>
+                                                <a href="http://editor.md.ipandao.com/examples/image-upload.html">Same domain upload</a>
+                                            </li>
+                                            <li>
+                                                <a href="http://editor.md.ipandao.com/examples/image-cross-domain-upload.html">Cross-domain upload</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="has-submenu">
+                                        <a href="javascript:;">Using Require.js, Sea.js, Zepto.js</a>
+                                        <ul class="pui-menu pui-menu-dropdown pui-z-depth-2">
+                                            <li>
+                                                <a href="http://editor.md.ipandao.com/examples/use-requirejs.html">Using Require.js</a>
+                                            </li>
+                                            <li>
+                                                <a href="http://editor.md.ipandao.com/examples/use-seajs.html">Using Sea.js</a>
+                                            </li>
+                                            <li>
+                                                <a href="http://editor.md.ipandao.com/examples/use-zepto.html">Using Zepto.js</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="http://editor.md.ipandao.com/examples/index.html">More...</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#dependents"><i class="fa fa-gears"></i> Dependents</a>
+                            </li>
+                            <li>
+                                <a href="#license"><i class="fa fa-check"></i> License</a>
+                            </li>
+                            <li>
+                                <a href="https://github.com/pandao/editor.md/blob/master/CHANGE.md" target="_blank"><i class="fa fa-refresh"></i> Changes</a>
+                            </li>
+                            <li>
+                                <a href="https://github.com/pandao/editor.md/issues" target="_blank"><i class="fa fa-question-circle"></i> Issues</a>
+                            </li>
+                            <li>
+                                <a href="https://github.com/pandao/editor.md" target="_blank"><i class="fa fa-github"></i> Github</a>
+                            </li>
+                            <li>
+                                <a href="https://gitee.com/pandao/editor.md" target="_blank"><i class="fa fa-git"></i> Git@OSC</a>
+                            </li>
+                            <li>
+                                <a href="https://pandao.github.io/editor.md/index.html"><i class="fa fa-language"></i> 中文版</a>
+                            </li>
+                        </ul>
+                    </menu>   
+                    <div class="page-header-container">
+                        <div class="editormd pui-z-depth-3 pui-bg-white editormd-vertical" id="index-editormd" style="width: 100%; height: 580px;"><textarea class="editormd-markdown-textarea" placeholder="Enjoy Markdown! coding now..." name="index-editormd-markdown-doc" style="display: none;">#
+ Eniac Data Science Project: Brazilian Market Expansion
+
+##Project Overview:
+
+
+
+
+Eniac, an online marketplace specializing in Apple-compatible 
+accessories, is considering an expansion into the Brazilian market. As 
+part of this initiative, the company is exploring a 3-year contract with
+ Magist, a potential partner in the region. The goal is to test the 
+market, create brand awareness, and explore the option of setting up its
+ own supply chain management.
+
+#####However there are two main concerns:
+#####1.Product Compatibility:
+  Eniac's current catalog is 100% tech products, heavily based on 
+Apple-compatible accessories. It's not clear if Magist is a suitable 
+partner for high-end tech products.
+
+#####2.Delivery Speed:
+   Among Eniac's priorities for customer satisfaction, fast deliveries 
+are crucial.
+    The delivery fees resulting from Magist's deal with the public Post 
+Office might be cost-effective, but there's uncertainty about the speed 
+of deliveries.
+
+
+###Data Insights:
+
+------------
+
+
+
+Through data analysis using SQL and Tableau, several insights have been 
+uncovered:
+
+
+  -  #####Expertise and Experience  with High-End Tech Products: 
+ Only 14.67% of Magist's products are tech-related, and the average 
+price of these products is $120.5. Out of 32,951 products sold by 
+Magist, only 3,390 are tech products.Magist has limited expertise and 
+experience with high-end tech products. Out of 15,798 products, only 175
+ are considered expensive.
+
+-    #####Magist's Average &amp; Estimated Delivery Time: 
+
+      The average delivery time for Magist is 12.5 days.Comparision with
+ Apple Store: Apple Store offers delivery within 1 to 7 business 
+days.Magist has an estimated delivery time of up to 140 days, but orders
+ are often delivered earlier.
+
+
+-    #####Magist's Tech-Oriented Revenue:
+ Magist's revenue from tech products is $40,000.
+
+
+ ####Repository Structure
+
+- The project repository is organized as follows:
+
+    #####data/      : Contains raw data used in the analysis.
+    ##### sql/        :   SQL scripts used for data processing and 
+analysis.
+    ##### tableau/: Tableau workbooks and visualizations.
+    #####docs/      : Documentation files, including this README.
+
+To replicate or extend the analysis:
+
+    Clone this repository to your local machine.
+    Execute SQL scripts in the sql/ directory to process and analyze the
+ data.
+    Open Tableau workbooks in the tableau/ directory to explore 
+visualizations.
+
+####Results and Recommendations
+
+The final analysis and recommendations will be documented in a detailed 
+report. Based on the insights gained, we will provide a conclusive 
+answer to the question of whether Magist is a suitable partner for 
+Eniac's expansion into the Brazilian market.
+#####Contributors:   
+   Santhoshi,Xen and Vijayapriya
+
+</textarea><div class="CodeMirror cm-s-default CodeMirror-wrap CodeMirror-focused" style="font-size: 13px; width: 680.8px; margin-top: 43.2px; height: 537.8px;"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 96.8px; left: 60px;"><textarea style="position: absolute; padding: 0px; width: 1px; height: 1em; outline: none;" wrap="off" autocorrect="off" autocapitalize="none" spellcheck="false" tabindex="0"></textarea></div><div class="CodeMirror-vscrollbar" cm-not-content="true" style="bottom: 0px; min-width: 18px; display: block;"><div style="min-width: 1px; height: 1725px;"></div></div><div class="CodeMirror-hscrollbar" cm-not-content="true" style="min-height: 18px;"><div style="height: 100%; min-height: 1px; width: 0px;"></div></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1" draggable="true"><div class="CodeMirror-sizer" style="margin-left: 48px; margin-bottom: 0px; border-right-width: 30px; min-height: 1725px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines"><div style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre>x</pre><div class="CodeMirror-linenumber CodeMirror-gutter-elt"><div>1</div></div><div class="CodeMirror-linenumber CodeMirror-gutter-elt"><div>14</div></div></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-cursors" style=""><div class="CodeMirror-cursor" style="left: 12px; top: 92.8px; height: 23.2px;">&nbsp;</div></div><div class="CodeMirror-code" style=""><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -48px; width: 48px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">1</div><div class="CodeMirror-gutter-elt" style="left: 38px; width: 9px;"><div class="CodeMirror-foldgutter-open CodeMirror-guttermarker-subtle"></div></div></div><pre class=""><span><span class="cm-header cm-header-1"># Eniac Data Science Project: Brazilian Market Expansion</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -48px; width: 48px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">2</div></div><pre class=""><span><span cm-text="">​</span></span></pre></div><div style="position: relative;" class=""><div class="CodeMirror-gutter-wrapper" style="left: -48px; width: 48px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">3</div><div class="CodeMirror-gutter-elt" style="left: 38px; width: 9px;"><div class="CodeMirror-foldgutter-open CodeMirror-guttermarker-subtle"></div></div></div><pre class=""><span><span class="cm-header cm-header-2">##Project Overview:</span></span></pre></div><div style="position: relative;" class=""><div class="CodeMirror-gutter-wrapper" style="left: -48px; width: 48px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">4</div></div><pre class=""><span><span cm-text="">​</span></span></pre></div><div style="position: relative;" class="CodeMirror-activeline"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-wrapper" style="left: -48px; width: 48px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">5</div></div><pre class=""><span><span cm-text="">​</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -48px; width: 48px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">6</div></div><pre class=""><span><span cm-text="">​</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -48px; width: 48px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">7</div></div><pre class=""><span><span cm-text="">​</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -48px; width: 48px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">8</div></div><pre class=""><span>Eniac, an online marketplace specializing in Apple-compatible accessories, is considering an expansion into the Brazilian market. As part of this initiative, the company is exploring a 3-year contract with Magist, a potential partner in the region. The goal is to test the market, create brand awareness, and explore the option of setting up its own supply chain management.</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -48px; width: 48px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">9</div></div><pre class=""><span><span cm-text="">​</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -48px; width: 48px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">10</div><div class="CodeMirror-gutter-elt" style="left: 38px; width: 9px;"><div class="CodeMirror-foldgutter-open CodeMirror-guttermarker-subtle"></div></div></div><pre class=""><span><span class="cm-header cm-header-5">#####However there are two main concerns:</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -48px; width: 48px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">11</div><div class="CodeMirror-gutter-elt" style="left: 38px; width: 9px;"><div class="CodeMirror-foldgutter-open CodeMirror-guttermarker-subtle"></div></div></div><pre class=""><span><span class="cm-header cm-header-5">#####1.Product Compatibility:</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -48px; width: 48px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">12</div></div><pre class=""><span>  Eniac's current catalog is 100% tech products, heavily based on Apple-compatible accessories. It's not clear if Magist is a suitable partner for high-end tech products.</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -48px; width: 48px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">13</div></div><pre class=""><span><span cm-text="">​</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -48px; width: 48px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">14</div><div class="CodeMirror-gutter-elt" style="left: 38px; width: 9px;"><div class="CodeMirror-foldgutter-open CodeMirror-guttermarker-subtle"></div></div></div><pre class=""><span><span class="cm-header cm-header-5">#####2.Delivery Speed:</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -48px; width: 48px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">15</div></div><pre class=""><span>   Among Eniac's priorities for customer satisfaction, fast deliveries are crucial.</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -48px; width: 48px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">16</div></div><pre class=""><span>    <span class="cm-comment">The delivery fees resulting from Magist's deal with the public Post Office might be cost-effective, but there's uncertainty about the speed of deliveries.</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -48px; width: 48px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">17</div></div><pre class=""><span><span cm-text="">​</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -48px; width: 48px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">18</div></div><pre class=""><span><span cm-text="">​</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -48px; width: 48px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">19</div><div class="CodeMirror-gutter-elt" style="left: 38px; width: 9px;"><div class="CodeMirror-foldgutter-open CodeMirror-guttermarker-subtle"></div></div></div><pre class=""><span><span class="cm-header cm-header-3">###Data Insights:</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -48px; width: 48px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">20</div></div><pre class=""><span><span cm-text="">​</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -48px; width: 48px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">21</div></div><pre class=""><span><span class="cm-hr">------------</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -48px; width: 48px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">22</div></div><pre class=""><span><span cm-text="">​</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -48px; width: 48px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">23</div></div><pre class=""><span><span cm-text="">​</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -48px; width: 48px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">24</div></div><pre class=""><span><span cm-text="">​</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -48px; width: 48px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">25</div></div><pre class=""><span>Through data analysis using SQL and Tableau, several insights have been uncovered:</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -48px; width: 48px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">26</div></div><pre class=""><span><span cm-text="">​</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -48px; width: 48px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">27</div></div><pre class=""><span><span cm-text="">​</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -48px; width: 48px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">28</div></div><pre class=""><span>  <span class="cm-variable-2">-  #####Expertise and Experience  with High-End Tech Products:</span><span class="cm-variable-2 cm-cm-overlay cm-trailingspace"> </span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -48px; width: 48px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">29</div></div><pre class=""><span> Only 14.67% of Magist's products are tech-related, and the average price of these products is $120.5. Out of 32,951 products sold by Magist, only 3,390 are tech products.Magist has limited expertise and experience with high-end tech products. Out of 15,798 products, only 175 are considered expensive.</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -48px; width: 48px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">30</div></div><pre class=""><span><span cm-text="">​</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -48px; width: 48px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">31</div></div><pre class=""><span><span class="cm-variable-2">-    #####Magist's Average &amp; Estimated Delivery Time:</span><span class="cm-variable-2 cm-cm-overlay cm-trailingspace"> </span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -48px; width: 48px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">32</div></div><pre class=""><span><span cm-text="">​</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -48px; width: 48px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">33</div></div><pre class=""><span>      <span class="cm-variable-2">The average delivery time for Magist is 12.5 days.Comparision with Apple Store: Apple Store offers delivery within 1 to 7 business days.Magist has an estimated delivery time of up to 140 days, but orders are often delivered earlier.</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -48px; width: 48px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">34</div></div><pre class=""><span><span cm-text="">​</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -48px; width: 48px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">35</div></div><pre class=""><span><span cm-text="">​</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -48px; width: 48px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">36</div></div><pre class=""><span><span class="cm-variable-2">-    #####Magist's Tech-Oriented Revenue:</span></span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -48px; width: 48px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">37</div></div><pre class=""><span> Magist's revenue from tech products is $40,000.</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -48px; width: 48px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 20px;">38</div></div><pre class=""><span><span cm-text="">​</span></span></pre></div></div></div></div></div></div><div style="position: absolute; height: 30px; width: 1px; top: 1725px;"></div><div class="CodeMirror-gutters" style="height: 1755px;"><div class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 28px;"></div><div class="CodeMirror-gutter CodeMirror-foldgutter"></div></div></div></div><a href="javascript:;" class="fa fa-close editormd-preview-close-btn"></a>
+
+<div class="editormd-preview" style="display: block; width: 680px; top: 43.2px; height: 537.8px;"><div class="markdown-body editormd-preview-container" previewcontainer="true" style="padding: 20px;"><h1 id="h1-eniac-data-science-project-brazilian-market-expansion"><a name="Eniac Data Science Project: Brazilian Market Expansion" class="reference-link"></a><span class="header-link octicon octicon-link"></span>Eniac Data Science Project: Brazilian Market Expansion</h1><h2 id="h2-project-overview-"><a name="Project Overview:" class="reference-link"></a><span class="header-link octicon octicon-link"></span>Project Overview:</h2><p>Eniac,
+ an online marketplace specializing in Apple-compatible accessories, is 
+considering an expansion into the Brazilian market. As part of this 
+initiative, the company is exploring a 3-year contract with Magist, a 
+potential partner in the region. The goal is to test the market, create 
+brand awareness, and explore the option of setting up its own supply 
+chain management.</p>
+<h5 id="h5-however-there-are-two-main-concerns-"><a name="However there are two main concerns:" class="reference-link"></a><span class="header-link octicon octicon-link"></span>However there are two main concerns:</h5><h5 id="h5-1-product-compatibility-"><a name="1.Product Compatibility:" class="reference-link"></a><span class="header-link octicon octicon-link"></span>1.Product Compatibility:</h5><p>
+  Eniac’s current catalog is 100% tech products, heavily based on 
+Apple-compatible accessories. It’s not clear if Magist is a suitable 
+partner for high-end tech products.</p>
+<h5 id="h5-2-delivery-speed-"><a name="2.Delivery Speed:" class="reference-link"></a><span class="header-link octicon octicon-link"></span>2.Delivery Speed:</h5><p>   Among Eniac’s priorities for customer satisfaction, fast deliveries are crucial.<br>
+    The delivery fees resulting from Magist’s deal with the public Post 
+Office might be cost-effective, but there’s uncertainty about the speed 
+of deliveries.</p>
+<h3 id="h3-data-insights-"><a name="Data Insights:" class="reference-link"></a><span class="header-link octicon octicon-link"></span>Data Insights:</h3><hr>
+<p>Through data analysis using SQL and Tableau, several insights have been uncovered:</p>
+<ul>
+<li><h5 id="h5-expertise-and-experience-with-high-end-tech-products-"><a name="Expertise and Experience  with High-End Tech Products:" class="reference-link"></a><span class="header-link octicon octicon-link"></span>Expertise and Experience  with High-End Tech Products:</h5>Only
+ 14.67% of Magist’s products are tech-related, and the average price of 
+these products is $120.5. Out of 32,951 products sold by Magist, only 
+3,390 are tech products.Magist has limited expertise and experience with
+ high-end tech products. Out of 15,798 products, only 175 are considered
+ expensive.</li></ul>
+<ul>
+<li><h5 id="h5-magist-s-average-amp-estimated-delivery-time-"><a name="Magist’s Average &amp; Estimated Delivery Time:" class="reference-link"></a><span class="header-link octicon octicon-link"></span>Magist’s Average &amp; Estimated Delivery Time:</h5><p>
+ The average delivery time for Magist is 12.5 days.Comparision with 
+Apple Store: Apple Store offers delivery within 1 to 7 business 
+days.Magist has an estimated delivery time of up to 140 days, but orders
+ are often delivered earlier.</p>
+</li></ul>
+<ul>
+<li><h5 id="h5-magist-s-tech-oriented-revenue-"><a name="Magist’s Tech-Oriented Revenue:" class="reference-link"></a><span class="header-link octicon octicon-link"></span>Magist’s Tech-Oriented Revenue:</h5>Magist’s revenue from tech products is $40,000.</li></ul>
+<h4 id="h4-repository-structure"><a name="Repository Structure" class="reference-link"></a><span class="header-link octicon octicon-link"></span>Repository Structure</h4><ul>
+<li><p>The project repository is organized as follows:</p>
+<h5 id="h5-data-contains-raw-data-used-in-the-analysis-"><a name="data/      : Contains raw data used in the analysis." class="reference-link"></a><span class="header-link octicon octicon-link"></span>data/      : Contains raw data used in the analysis.</h5><h5 id="h5-sql-sql-scripts-used-for-data-processing-and-analysis-"><a name="sql/        :   SQL scripts used for data processing and analysis." class="reference-link"></a><span class="header-link octicon octicon-link"></span>sql/        :   SQL scripts used for data processing and analysis.</h5><h5 id="h5-tableau-tableau-workbooks-and-visualizations-"><a name="tableau/: Tableau workbooks and visualizations." class="reference-link"></a><span class="header-link octicon octicon-link"></span>tableau/: Tableau workbooks and visualizations.</h5><h5 id="h5-docs-documentation-files-including-this-readme-"><a name="docs/      : Documentation files, including this README." class="reference-link"></a><span class="header-link octicon octicon-link"></span>docs/      : Documentation files, including this README.</h5></li></ul>
+<p>To replicate or extend the analysis:</p>
+<pre class="prettyprint linenums prettyprinted" style=""><ol class="linenums"><li class="L0"><code><span class="typ">Clone</span><span class="pln"> </span><span class="kwd">this</span><span class="pln"> repository to your </span><span class="kwd">local</span><span class="pln"> machine</span><span class="pun">.</span></code></li><li class="L1"><code><span class="typ">Execute</span><span class="pln"> SQL scripts </span><span class="kwd">in</span><span class="pln"> the sql</span><span class="pun">/</span><span class="pln"> directory to process </span><span class="kwd">and</span><span class="pln"> analyze the data</span><span class="pun">.</span></code></li><li class="L2"><code><span class="typ">Open</span><span class="pln"> </span><span class="typ">Tableau</span><span class="pln"> workbooks </span><span class="kwd">in</span><span class="pln"> the tableau</span><span class="pun">/</span><span class="pln"> directory to explore visualizations</span><span class="pun">.</span></code></li></ol></pre><h4 id="h4-results-and-recommendations"><a name="Results and Recommendations" class="reference-link"></a><span class="header-link octicon octicon-link"></span>Results and Recommendations</h4><p>The
+ final analysis and recommendations will be documented in a detailed 
+report. Based on the insights gained, we will provide a conclusive 
+answer to the question of whether Magist is a suitable partner for 
+Eniac’s expansion into the Brazilian market.</p>
+<h5 id="h5-contributors-"><a name="Contributors:" class="reference-link"></a><span class="header-link octicon octicon-link"></span>Contributors:</h5><p>   Santhoshi,Xen and Vijayapriya</p>
+</div></div>
+<div class="editormd-container-mask" style="display: none;"></div>
+<div class="editormd-mask" style="background-color: rgb(255, 255, 255); opacity: 0.1; z-index: 99998; display: none;"></div><div class="editormd-toolbar" style="display: block; position: absolute; width: 100%; left: 0px;"><div class="editormd-toolbar-container"><ul class="editormd-menu"><li><a href="javascript:;" title="Undo(Ctrl+Z)" unselectable="on"><i class="fa fa-undo" name="undo" unselectable="on"></i></a></li><li><a href="javascript:;" title="Redo(Ctrl+Y)" unselectable="on"><i class="fa fa-repeat" name="redo" unselectable="on"></i></a></li><li class="divider" unselectable="on">|</li><li><a href="javascript:;" title="Bold" unselectable="on"><i class="fa fa-bold" name="bold" unselectable="on"></i></a></li><li><a href="javascript:;" title="Strikethrough" unselectable="on"><i class="fa fa-strikethrough" name="del" unselectable="on"></i></a></li><li><a href="javascript:;" title="Italic" unselectable="on"><i class="fa fa-italic" name="italic" unselectable="on"></i></a></li><li><a href="javascript:;" title="Block quote" unselectable="on"><i class="fa fa-quote-left" name="quote" unselectable="on"></i></a></li><li><a href="javascript:;" title="Words first letter convert to uppercase" unselectable="on"><i class="fa" name="ucwords" style="font-size:20px;margin-top: -3px;">Aa</i></a></li><li><a href="javascript:;" title="Selection text convert to uppercase" unselectable="on"><i class="fa fa-font" name="uppercase" unselectable="on"></i></a></li><li><a href="javascript:;" title="Selection text convert to lowercase" unselectable="on"><i class="fa" name="lowercase" style="font-size:24px;margin-top: -10px;">a</i></a></li><li class="divider" unselectable="on">|</li><li><a href="javascript:;" title="Heading 1" unselectable="on"><i class="fa editormd-bold" name="h1" unselectable="on">H1</i></a></li><li><a href="javascript:;" title="Heading 2" unselectable="on"><i class="fa editormd-bold" name="h2" unselectable="on">H2</i></a></li><li><a href="javascript:;" title="Heading 3" unselectable="on"><i class="fa editormd-bold" name="h3" unselectable="on">H3</i></a></li><li><a href="javascript:;" title="Heading 4" unselectable="on"><i class="fa editormd-bold" name="h4" unselectable="on">H4</i></a></li><li><a href="javascript:;" title="Heading 5" unselectable="on"><i class="fa editormd-bold" name="h5" unselectable="on">H5</i></a></li><li><a href="javascript:;" title="Heading 6" unselectable="on"><i class="fa editormd-bold" name="h6" unselectable="on">H6</i></a></li><li class="divider" unselectable="on">|</li><li><a href="javascript:;" title="Unordered list" unselectable="on"><i class="fa fa-list-ul" name="list-ul" unselectable="on"></i></a></li><li><a href="javascript:;" title="Ordered list" unselectable="on"><i class="fa fa-list-ol" name="list-ol" unselectable="on"></i></a></li><li><a href="javascript:;" title="Horizontal rule" unselectable="on"><i class="fa fa-minus" name="hr" unselectable="on"></i></a></li><li class="divider" unselectable="on">|</li><li><a href="javascript:;" title="Link" unselectable="on"><i class="fa fa-link" name="link" unselectable="on"></i></a></li><li><a href="javascript:;" title="Reference link" unselectable="on"><i class="fa fa-anchor" name="reference-link" unselectable="on"></i></a></li><li><a href="javascript:;" title="Image" unselectable="on"><i class="fa fa-picture-o" name="image" unselectable="on"></i></a></li><li><a href="javascript:;" title="Code inline" unselectable="on"><i class="fa fa-code" name="code" unselectable="on"></i></a></li><li><a href="javascript:;" title="Preformatted text / Code block (Tab indent)" unselectable="on"><i class="fa fa-file-code-o" name="preformatted-text" unselectable="on"></i></a></li><li><a href="javascript:;" title="Code block (Multi-languages)" unselectable="on"><i class="fa fa-file-code-o" name="code-block" unselectable="on"></i></a></li><li><a href="javascript:;" title="Tables" unselectable="on"><i class="fa fa-table" name="table" unselectable="on"></i></a></li><li><a href="javascript:;" title="Datetime" unselectable="on"><i class="fa fa-clock-o" name="datetime" unselectable="on"></i></a></li><li><a href="javascript:;" title="Emoji" unselectable="on"><i class="fa fa-smile-o" name="emoji" unselectable="on"></i></a></li><li><a href="javascript:;" title="HTML Entities" unselectable="on"><i class="fa fa-copyright" name="html-entities" unselectable="on"></i></a></li><li><a href="javascript:;" title="Page break" unselectable="on"><i class="fa fa-newspaper-o" name="pagebreak" unselectable="on"></i></a></li><li class="divider" unselectable="on">|</li><li><a href="javascript:;" title="" unselectable="on"><i class="fa fa-terminal" name="goto-line" unselectable="on"></i></a></li><li><a href="javascript:;" title="Unwatch" unselectable="on"><i class="fa fa-eye-slash" name="watch" unselectable="on"></i></a></li><li><a href="javascript:;" title="HTML Preview (Press Shift + ESC exit)" unselectable="on"><i class="fa fa-desktop" name="preview" unselectable="on"></i></a></li><li><a href="javascript:;" title="Fullscreen (Press ESC exit)" unselectable="on"><i class="fa fa-arrows-alt" name="fullscreen" unselectable="on"></i></a></li><li><a href="javascript:;" title="Clear" unselectable="on"><i class="fa fa-eraser" name="clear" unselectable="on"></i></a></li><li><a href="javascript:;" title="Search" unselectable="on"><i class="fa fa-search" name="search" unselectable="on"></i></a></li><li class="divider" unselectable="on">|</li><li><a href="javascript:;" title="Help" unselectable="on"><i class="fa fa-question-circle" name="help" unselectable="on"></i></a></li><li><a href="javascript:;" title="About Editor.md" unselectable="on"><i class="fa fa-info-circle" name="info" unselectable="on"></i></a></li></ul></div></div><div class="editormd-dialog editormd-help-dialog" style="display: none; z-index: 99999; width: 840px; height: 540px; top: 95.5px; left: 348px;"><div class="editormd-dialog-header" style="cursor: move;"><strong class="editormd-dialog-title">Help</strong></div><a href="javascript:;" class="fa fa-close editormd-dialog-close"></a><div class="editormd-dialog-container"><div class="markdown-body" style="font-family:微软雅黑, Helvetica, Tahoma, STXihei,Arial;height:390px;overflow:auto;font-size:14px;border-bottom:1px solid #ddd;padding:0 20px 20px 0;"><h5 id="h5-markdown-markdown-syntax-tutorial-"><a name="Markdown语法教程 (Markdown syntax tutorial)" class="reference-link" target="_blank"></a><span class="header-link octicon octicon-link"></span>Markdown语法教程 (Markdown syntax tutorial)</h5><ul>
+<li><a href="http://daringfireball.net/projects/markdown/syntax/" title="Markdown Syntax" target="_blank">Markdown Syntax</a></li><li><a href="https://guides.github.com/features/mastering-markdown/" title="Mastering Markdown" target="_blank">Mastering Markdown</a></li><li><a href="https://help.github.com/articles/markdown-basics/" title="Markdown Basics" target="_blank">Markdown Basics</a></li><li><a href="https://help.github.com/articles/github-flavored-markdown/" title="GitHub Flavored Markdown" target="_blank">GitHub Flavored Markdown</a></li><li><a href="http://www.markdown.cn/" title="Markdown 语法说明（简体中文）" target="_blank">Markdown 语法说明（简体中文）</a></li><li><a href="http://markdown.tw/" title="Markdown 語法說明（繁體中文）" target="_blank">Markdown 語法說明（繁體中文）</a></li></ul>
+<h5 id="h5--keyboard-shortcuts-"><a name="键盘快捷键 (Keyboard shortcuts)" class="reference-link" target="_blank"></a><span class="header-link octicon octicon-link"></span>键盘快捷键 (Keyboard shortcuts)</h5><blockquote>
+<p>If Editor.md code editor is on focus, you can use keyboard shortcuts.</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Keyboard shortcuts (键盘快捷键)</th>
+<th style="text-align:left">说明</th>
+<th style="text-align:left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">F9</td>
+<td style="text-align:left">切换实时预览</td>
+<td style="text-align:left">Switch watch/unwatch</td>
+</tr>
+<tr>
+<td style="text-align:left">F10</td>
+<td style="text-align:left">全屏HTML预览(按 Shift + ESC 退出)</td>
+<td style="text-align:left">Full preview HTML (Press Shift + ESC exit)</td>
+</tr>
+<tr>
+<td style="text-align:left">F11</td>
+<td style="text-align:left">切换全屏状态</td>
+<td style="text-align:left">Switch fullscreen (Press ESC exit)</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl + 1~6 / Command + 1~6</td>
+<td style="text-align:left">插入标题1~6</td>
+<td style="text-align:left">Insert heading 1~6</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl + A / Command + A</td>
+<td style="text-align:left">全选</td>
+<td style="text-align:left">Select all</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl + B / Command + B</td>
+<td style="text-align:left">插入粗体</td>
+<td style="text-align:left">Insert bold</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl + D / Command + D</td>
+<td style="text-align:left">插入日期时间</td>
+<td style="text-align:left">Insert datetime</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl + E / Command + E</td>
+<td style="text-align:left">插入Emoji符号</td>
+<td style="text-align:left">Insert :emoji:</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl + F / Command + F</td>
+<td style="text-align:left">查找/搜索</td>
+<td style="text-align:left">Start searching</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl + G / Command + G</td>
+<td style="text-align:left">切换到下一个搜索结果项</td>
+<td style="text-align:left">Find next search results</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl + H / Command + H</td>
+<td style="text-align:left">插入水平线</td>
+<td style="text-align:left">Insert horizontal rule</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl + I / Command + I</td>
+<td style="text-align:left">插入斜体</td>
+<td style="text-align:left">Insert italic</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl + K / Command + K</td>
+<td style="text-align:left">插入行内代码</td>
+<td style="text-align:left">Insert inline code</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl + L / Command + L</td>
+<td style="text-align:left">插入链接</td>
+<td style="text-align:left">Insert link</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl + U / Command + U</td>
+<td style="text-align:left">插入无序列表</td>
+<td style="text-align:left">Insert unordered list</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl + Q</td>
+<td style="text-align:left">代码折叠切换</td>
+<td style="text-align:left">Switch code fold</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl + Z / Command + Z</td>
+<td style="text-align:left">撤销</td>
+<td style="text-align:left">Undo</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl + Y / Command + Y</td>
+<td style="text-align:left">重做</td>
+<td style="text-align:left">Redo</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl + Shift + A</td>
+<td style="text-align:left">插入@链接</td>
+<td style="text-align:left">Insert @link</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl + Shift + C</td>
+<td style="text-align:left">插入行内代码</td>
+<td style="text-align:left">Insert inline code</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl + Shift + E</td>
+<td style="text-align:left">打开插入Emoji表情对话框</td>
+<td style="text-align:left">Open emoji dialog</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl + Shift + F / Command + Option + F</td>
+<td style="text-align:left">替换</td>
+<td style="text-align:left">Replace</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl + Shift + G / Shift + Command + G</td>
+<td style="text-align:left">切换到上一个搜索结果项</td>
+<td style="text-align:left">Find previous search results</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl + Shift + H</td>
+<td style="text-align:left">打开HTML实体字符对话框</td>
+<td style="text-align:left">Open HTML Entities dialog</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl + Shift + I</td>
+<td style="text-align:left">插入图片</td>
+<td style="text-align:left">Insert image ![]()</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl + Shift + K</td>
+<td style="text-align:left">插入TeX(KaTeX)公式符号</td>
+<td style="text-align:left">Insert TeX(KaTeX) symbol $$TeX$$</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl + Shift + L</td>
+<td style="text-align:left">打开插入链接对话框</td>
+<td style="text-align:left">Open link dialog</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl + Shift + O</td>
+<td style="text-align:left">插入有序列表</td>
+<td style="text-align:left">Insert ordered list</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl + Shift + P</td>
+<td style="text-align:left">打开插入PRE对话框</td>
+<td style="text-align:left">Open Preformatted text dialog</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl + Shift + Q</td>
+<td style="text-align:left">插入引用</td>
+<td style="text-align:left">Insert blockquotes</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl + Shift + R / Shift + Command + Option + F</td>
+<td style="text-align:left">全部替换</td>
+<td style="text-align:left">Replace all</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl + Shift + S</td>
+<td style="text-align:left">插入删除线</td>
+<td style="text-align:left">Insert strikethrough</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl + Shift + T</td>
+<td style="text-align:left">打开插入表格对话框</td>
+<td style="text-align:left">Open table dialog</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl + Shift + U</td>
+<td style="text-align:left">将所选文字转成大写</td>
+<td style="text-align:left">Selection text convert to uppercase</td>
+</tr>
+<tr>
+<td style="text-align:left">Shift + Alt + C</td>
+<td style="text-align:left">插入```代码</td>
+<td style="text-align:left">Insert code blocks (```)</td>
+</tr>
+<tr>
+<td style="text-align:left">Shift + Alt + H</td>
+<td style="text-align:left">打开使用帮助对话框</td>
+<td style="text-align:left">Open help dialog</td>
+</tr>
+<tr>
+<td style="text-align:left">Shift + Alt + L</td>
+<td style="text-align:left">将所选文本转成小写</td>
+<td style="text-align:left">Selection text convert to lowercase</td>
+</tr>
+<tr>
+<td style="text-align:left">Shift + Alt + P</td>
+<td style="text-align:left">插入分页符</td>
+<td style="text-align:left">Insert page break</td>
+</tr>
+<tr>
+<td style="text-align:left">Alt + L</td>
+<td style="text-align:left">将所选文本转成小写</td>
+<td style="text-align:left">Selection text convert to lowercase</td>
+</tr>
+<tr>
+<td style="text-align:left">Shift + Alt + U</td>
+<td style="text-align:left">将所选的每个单词的首字母转成大写</td>
+<td style="text-align:left">Selection words first letter convert to Uppercase</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl + Shift + Alt + C</td>
+<td style="text-align:left">打开插入代码块对话框层</td>
+<td style="text-align:left">Open code blocks dialog</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl + Shift + Alt + I</td>
+<td style="text-align:left">打开插入图片对话框层</td>
+<td style="text-align:left">Open image dialog</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl + Shift + Alt + U</td>
+<td style="text-align:left">将所选文本的第一个首字母转成大写</td>
+<td style="text-align:left">Selection text first letter convert to uppercase</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl + Alt + G</td>
+<td style="text-align:left">跳转到指定的行</td>
+<td style="text-align:left">Goto line</td>
+</tr>
+</tbody>
+</table>
+<h5 id="h5-emoji-emoji-reference-"><a name="Emoji表情参考 (Emoji reference)" class="reference-link" target="_blank"></a><span class="header-link octicon octicon-link"></span>Emoji表情参考 (Emoji reference)</h5><ul>
+<li><a href="http://www.emoji-cheat-sheet.com/" title="Github emoji" target="_blank">Github emoji</a></li><li><a href="http://twitter.github.io/twemoji/preview.html" title="Twitter Emoji \(Twemoji\)" target="_blank">Twitter Emoji (Twemoji)</a></li><li><a href="http://fortawesome.github.io/Font-Awesome/icons/" title="FontAwesome icons emoji" target="_blank">FontAwesome icons emoji</a></li></ul>
+<h5 id="h5--flowchart-reference-"><a name="流程图参考 (Flowchart reference)" class="reference-link" target="_blank"></a><span class="header-link octicon octicon-link"></span>流程图参考 (Flowchart reference)</h5><p><a href="http://adrai.github.io/flowchart.js/" target="_blank">http://adrai.github.io/flowchart.js/</a></p>
+<h5 id="h5--sequencediagram-reference-"><a name="时序图参考 (SequenceDiagram reference)" class="reference-link" target="_blank"></a><span class="header-link octicon octicon-link"></span>时序图参考 (SequenceDiagram reference)</h5><p><a href="http://bramp.github.io/js-sequence-diagrams/" target="_blank">http://bramp.github.io/js-sequence-diagrams/</a></p>
+<h5 id="h5-tex-latex-reference"><a name="TeX/LaTeX reference" class="reference-link" target="_blank"></a><span class="header-link octicon octicon-link"></span>TeX/LaTeX reference</h5><p><a href="http://meta.wikimedia.org/wiki/Help:Formula" target="_blank">http://meta.wikimedia.org/wiki/Help:Formula</a></p>
+</div><div class="editormd-dialog-footer"><button class="editormd-btn editormd-close-btn">Close</button></div></div><div class="editormd-dialog-mask editormd-dialog-mask-bg"></div><div class="editormd-dialog-mask editormd-dialog-mask-con"></div></div></div>                        
+                    </div>
+                </div>
+            </header>
+            <div class="pui-grid pui-layout pui-layout-fixed pui-layout-fixed-1200 page-content">
+                <div class="pui-row">
+                    <div class="pui-grid-xs-8">
+                        <a name="start"></a>
+                        <div class="pui-card pui-card-simple">
+                            <div class="pui-card-title">
+                                <h1 class="pui-text-left">Example</h1>
+                            </div>
+                            <div class="pui-card-box">
+                                <div class="code-box">
+                                    <pre class="prettyprint lang-html example-code prettyprinted" style=""><span class="tag">&lt;link</span><span class="pln"> </span><span class="atn">rel</span><span class="pun">=</span><span class="atv">"stylesheet"</span><span class="pln"> </span><span class="atn">href</span><span class="pun">=</span><span class="atv">"editormd/css/editormd.css"</span><span class="pln"> </span><span class="tag">/&gt;</span><span class="pln">
+</span><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">id</span><span class="pun">=</span><span class="atv">"test-editor"</span><span class="tag">&gt;</span><span class="pln">
+    </span><span class="tag">&lt;textarea</span><span class="pln"> </span><span class="atn">style</span><span class="pun">=</span><span class="atv">"</span><span class="pln">display</span><span class="pun">:</span><span class="pln">none</span><span class="pun">;</span><span class="atv">"</span><span class="tag">&gt;</span><span class="pln">### Editor.md
+
+**Editor.md**: The open source embeddable online markdown editor, based on CodeMirror &amp; jQuery &amp; Marked.
+    </span><span class="tag">&lt;/textarea&gt;</span><span class="pln">
+</span><span class="tag">&lt;/div&gt;</span><span class="pln">
+</span><span class="tag">&lt;script</span><span class="pln"> </span><span class="atn">src</span><span class="pun">=</span><span class="atv">"https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"</span><span class="tag">&gt;&lt;/script&gt;</span><span class="pln">
+</span><span class="tag">&lt;script</span><span class="pln"> </span><span class="atn">src</span><span class="pun">=</span><span class="atv">"editormd/editormd.min.js"</span><span class="tag">&gt;&lt;/script&gt;</span><span class="pln">
+</span><span class="tag">&lt;script</span><span class="pln"> </span><span class="atn">type</span><span class="pun">=</span><span class="atv">"text/javascript"</span><span class="tag">&gt;</span><span class="pln">
+    $</span><span class="pun">(</span><span class="kwd">function</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+        </span><span class="kwd">var</span><span class="pln"> editor </span><span class="pun">=</span><span class="pln"> editormd</span><span class="pun">(</span><span class="str">"test-editor"</span><span class="pun">,</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+            </span><span class="com">// width  : "100%",</span><span class="pln">
+            </span><span class="com">// height : "100%",</span><span class="pln">
+            path   </span><span class="pun">:</span><span class="pln"> </span><span class="str">"editormd/lib/"</span><span class="pln">
+        </span><span class="pun">});</span><span class="pln">
+    </span><span class="pun">});</span><span class="pln">
+</span><span class="tag">&lt;/script&gt;</span></pre>
+                                    <span class="copy-btn" data-clipboard-text="&lt;link rel=&quot;stylesheet&quot; href=&quot;editormd/css/editormd.css&quot; /&gt;
+&lt;div id=&quot;test-editor&quot;&gt;
+    &lt;textarea style=&quot;display:none;&quot;&gt;### Editor.md
+
+**Editor.md**: The open source embeddable online markdown editor, based on CodeMirror &amp; jQuery &amp; Marked.
+    &lt;/textarea&gt;
+&lt;/div&gt;
+&lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;editormd/editormd.min.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+    $(function() {
+        var editor = editormd(&quot;test-editor&quot;, {
+            // width  : &quot;100%&quot;,
+            // height : &quot;100%&quot;,
+            path   : &quot;editormd/lib/&quot;
+        });
+    });
+&lt;/script&gt;">Copy</span>
+                                </div>
+                                <p class="pui-text-right"><a href="http://editor.md.ipandao.com/examples/" class="link pui-text-blue">More Examples &gt;&gt;</a></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pui-grid-xs-4">
+                        <div class="pui-card-title">
+                            <h1 class="pui-text-left">Features</h1>
+                        </div>
+                        <div class="pui-card-box">
+                            <ul>
+                                <li>Support Standard Markdown / CommonMark and GFM(GitHub Flavored Markdown);</li>
+                                <li>Full-featured: Real-time Preview, <a href="http://editor.md.ipandao.com/examples/image-upload.html" class="link pui-text-blue">Image (cross-domain) upload</a>,
+ Preformatted text/Code blocks/Tables insert, Code fold, Search replace,
+ Read only, Themes, Multi-languages, L18n, HTML entities, Code syntax 
+highlighting...;</li>
+                                <li>Markdown Extras : Support <a href="http://editor.md.ipandao.com/examples/toc.html" class="link pui-text-blue">ToC (Table of Contents)</a>, <a href="http://editor.md.ipandao.com/examples/emoji.html" class="link pui-text-blue">Emoji</a>, <a href="http://editor.md.ipandao.com/examples/task-lists.html" class="link pui-text-blue">Task lists</a>, <a href="http://editor.md.ipandao.com/examples/@links.html" class="link pui-text-blue">@Links</a>...;</li>
+                                <li>Support <a href="http://editor.md.ipandao.com/examples/katex.html" class="link pui-text-blue">TeX (LaTeX expressions, Based on KaTeX)</a>, <a href="http://editor.md.ipandao.com/examples/flowchart.html" class="link pui-text-blue">Flowchart</a> and <a href="http://editor.md.ipandao.com/examples/sequence-diagram.html" class="link pui-text-blue">Sequence Diagram</a> of Markdown extended syntax;</li>
+                                <li>Support identification, interpretation, fliter of the HTML tags;</li>
+                                <li>Support AMD/CMD (Require.js &amp; Sea.js) Module Loader, and Custom/define editor plugins;</li>
+                                <li>Compatible with all major browsers (IE8+), compatible Zepto.js and iPad;</li>
+                                <li>Support Custom theme styles;</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="pui-hr pui-layout-fixed pui-layout-fixed-1200">
+            <div class="pui-grid pui-layout pui-layout-fixed pui-layout-fixed-1200 page-content">
+                <div class="pui-row">
+                    <div class="pui-grid-xs-12 pui-grid-sm-4 pui-grid-md-4">
+                        <a name="download"></a>
+                        <div class="pui-card pui-card-simple">
+                            <div class="pui-card-title">
+                                <h1>Download &amp; install</h1>
+                            </div>
+                            <div class="pui-card-box">
+                                <p>Latest version: v1.5.0，Update: 2015-06-09</p>
+                                <p><a href="https://github.com/pandao/editor.md/archive/master.zip" class="pui-btn pui-btn-secondary"><i class="fa fa-lg fa-github"></i> Github download</a></p>
+                                <br>
+                                <p><img src="Editor.md%20-%20Open%20source%20online%20Markdown%20editor_files/editor.md_005.svg"> <img src="Editor.md%20-%20Open%20source%20online%20Markdown%20editor_files/editor.md_004.svg"></p>
+                                <br>
+                                <p>Or NPM install:</p>
+                                <p><code>npm install editor.md</code></p>
+                                <p><img src="Editor.md%20-%20Open%20source%20online%20Markdown%20editor_files/editor.md_003.svg"></p>
+                                <p>Or Bower install: </p>
+                                <p><code>bower install editor.md</code></p>
+                                <p><img src="Editor.md%20-%20Open%20source%20online%20Markdown%20editor_files/editor.md_002.svg"></p>
+                                <br>
+                                <p><strong class="pui-text-md">Change logs: </strong></p>
+                                <p><a href="https://github.com/pandao/editor.md/blob/master/CHANGE.md" class="pui-link" target="_blank">CHANGES</a></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pui-grid-xs-12 pui-grid-sm-4 pui-grid-md-4">                        
+                        <a name="dependents"></a>
+                        <div class="pui-card pui-card-simple">
+                            <div class="pui-card-title">
+                                <h1>Dependents</h1>
+                            </div>
+                            <div class="pui-card-box">
+                                <p>Projects :</p>
+                                <ul>
+                                    <li>
+                                        <a href="http://codemirror.net/" title="CodeMirror" target="_blank">CodeMirror</a>
+                                    </li>
+                                    <li>
+                                        <a href="https://github.com/chjj/marked" title="marked" target="_blank">marked</a>
+                                    </li>
+                                    <li>
+                                        <a href="http://jquery.com/" title="jQuery" target="_blank">jQuery</a>
+                                    </li>
+                                    <li>
+                                        <a href="http://fontawesome.io/" title="FontAwesome" target="_blank">FontAwesome</a>
+                                    </li>
+                                    <li>
+                                        <a href="https://github.com/sindresorhus/github-markdown-css" title="github-markdown.css" target="_blank">github-markdown.css</a>
+                                    </li>
+                                    <li>
+                                        <a href="http://khan.github.io/KaTeX/" title="KaTeX" target="_blank">KaTeX</a>
+                                    </li>
+                                    <li>
+                                        <a href="http://raphaeljs.com/" title="Rephael.js" target="_blank">Rephael.js</a>
+                                    </li>
+                                    <li>
+                                        <a href="http://code.google.com/p/google-code-prettify/" title="prettify.js" target="_blank">prettify.js</a>
+                                    </li>
+                                    <li>
+                                        <a href="http://adrai.github.io/flowchart.js/" title="flowchart.js" target="_blank">flowchart.js</a>
+                                    </li>
+                                    <li>
+                                        <a href="http://bramp.github.io/js-sequence-diagrams/" title="sequence-diagram.js" target="_blank">sequence-diagram.js</a>
+                                    </li>
+                                    <li>
+                                        <a href="https://github.com/pandao/prefixes.scss" title="Prefixes.scss" target="_blank">Prefixes.scss</a>
+                                    </li>
+                                </ul>
+                                <br>
+                                <p>Development tools :</p>
+                                <ul>
+                                    <li>
+                                        <a href="https://code.visualstudio.com/" title="Visual Studio Code" target="_blank">Visual Studio Code</a>
+                                    </li>
+                                    <li>
+                                        <a href="http://sass-lang.com/" title="Sass/Scss" target="_blank">Sass/Scss</a>
+                                    </li>
+                                    <li>
+                                        <a href="http://gulpjs.com/" title="Gulp.js" target="_blank">Gulp.js</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pui-grid-xs-12 pui-grid-sm-4 pui-grid-md-4">                
+                        <a name="license"></a>
+                        <div class="pui-card pui-card-simple">
+                            <div class="pui-card-title">
+                                <h1>License</h1>
+                            </div>
+                            <div class="pui-card-box">
+                                <p>Editor.md follows the <a href="https://github.com/pandao/editor.md/blob/master/LICENSE" class="pui-link" target="_blank">MIT License</a>, Anyone can freely use.</p>
+                                <br>
+                                <p><a href="https://github.com/pandao/editor.md/issues/new" class="pui-btn pui-btn-secondary" target="_blank" title="Submit bugs or new issues"><i class="fa fa-lg fa-github"></i> Submit bugs or new issues</a></p>
+                                <p><img src="Editor.md%20-%20Open%20source%20online%20Markdown%20editor_files/editor.md.svg"></p>
+                                <div class="github-buttons">
+                                    <p>Fork me on Github :</p>
+                                    <p><iframe src="Editor.md%20-%20Open%20source%20online%20Markdown%20editor_files/github-btn.htm" frameborder="0" scrolling="0" width="160px" height="30px"></iframe></p>
+                                    <p><iframe src="Editor.md%20-%20Open%20source%20online%20Markdown%20editor_files/github-btn_002.htm" frameborder="0" scrolling="0" width="160px" height="30px"></iframe></p>
+                                    <p><iframe src="Editor.md%20-%20Open%20source%20online%20Markdown%20editor_files/github-btn_003.htm" frameborder="0" scrolling="0" width="160px" height="30px"></iframe>
+</p>
+                                </div>
+                            </div>
+                        </div>                        
+                    </div>
+                </div>
+            </div>
+            <hr class="pui-hr pui-layout-fixed pui-layout-fixed-1200">
+            <div class="pui-grid pui-layout pui-layout-fixed pui-layout-fixed-1200 page-content">
+                <div class="pui-row">
+                    <div class="pui-grid-xs-12">
+                        <a name="users"></a>
+                        <div class="pui-card pui-card-simple">
+                            <div class="pui-card-title">
+                                <h1 class="pui-text-center">Users</h1>
+                            </div>
+                            <div class="pui-card-box">
+                                <ul class="pui-menu pui-menu-inline case-list">
+                                    <li>
+                                        <a href="https://www.alipay.com/" target="_blank" title="Alipay">
+                                            <img src="Editor.md%20-%20Open%20source%20online%20Markdown%20editor_files/alipay.png" alt="Alipay">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.alibaba.com/" target="_blank" title="Alibaba">
+                                            <img src="Editor.md%20-%20Open%20source%20online%20Markdown%20editor_files/alibaba.png" alt="Alibaba">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.huawei.com/" target="_blank" title="Huawei">
+                                            <img src="Editor.md%20-%20Open%20source%20online%20Markdown%20editor_files/huawei.png" alt="Huawei">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://work.weixin.qq.com/" target="_blank" title="WeChat Work">
+                                            <img src="Editor.md%20-%20Open%20source%20online%20Markdown%20editor_files/wechat-work.png" alt="WeChat Work">
+                                        </a>
+                                    </li>
+                                </ul>
+                                <ul class="pui-menu pui-menu-inline case-list">
+                                    <li>
+                                        <a href="https://www.jd.com/" target="_blank" title="JD.com">
+                                            <img src="Editor.md%20-%20Open%20source%20online%20Markdown%20editor_files/jd.png" alt="JD.com">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.360.cn/" target="_blank" title="360">
+                                            <img src="Editor.md%20-%20Open%20source%20online%20Markdown%20editor_files/360.png" alt="360">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.4399.com/" target="_blank" title="4399">
+                                            <img src="Editor.md%20-%20Open%20source%20online%20Markdown%20editor_files/4399.png" alt="4399">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.oschina.net/" target="_blank" title="OSChina.net">
+                                            <img src="Editor.md%20-%20Open%20source%20online%20Markdown%20editor_files/oschina.png" alt="OSChina.net">
+                                        </a>
+                                    </li>
+                                </ul>
+                                <ul class="pui-menu pui-menu-inline case-list">
+                                    <li>
+                                        <a href="https://www.youdao.com/" target="_blank" title="Youdao">
+                                            <img src="Editor.md%20-%20Open%20source%20online%20Markdown%20editor_files/youdao.jpg" alt="Youdao">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.yy.com/" target="_blank" title="YY.com">
+                                            <img src="Editor.md%20-%20Open%20source%20online%20Markdown%20editor_files/yy.jpg" alt="YY.com">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.jumei.com/" target="_blank" title="JUMEI">
+                                            <img src="Editor.md%20-%20Open%20source%20online%20Markdown%20editor_files/jumei.jpg" alt="JUMEI">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.9you.com/" target="_blank" title="9you.com">
+                                            <img src="Editor.md%20-%20Open%20source%20online%20Markdown%20editor_files/9you.jpg" alt="9you.com">
+                                        </a>
+                                    </li>
+                                </ul>
+                                <ul class="pui-menu pui-menu-inline case-list">
+                                    <li>
+                                        <a href="https://www.csdn.net/" target="_blank" title="CSDN">
+                                            <img src="Editor.md%20-%20Open%20source%20online%20Markdown%20editor_files/csdn.jpg" alt="CSDN">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.mi.com/" target="_blank" title="Xiaomi MI.com">
+                                            <img src="Editor.md%20-%20Open%20source%20online%20Markdown%20editor_files/xiaomi.png" alt="Xiaomi MI.com">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.meizu.com/" target="_blank" title="MEIZU">
+                                            <img src="Editor.md%20-%20Open%20source%20online%20Markdown%20editor_files/meizu.png" alt="MEIZU">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://golangtc.com/" target="_blank" title="Golang Chinese community">
+                                            <img src="Editor.md%20-%20Open%20source%20online%20Markdown%20editor_files/golangtc.jpg" alt="Golang Chinese community">
+                                        </a>
+                                    </li>
+                                </ul>
+                                <ul class="pui-menu pui-menu-inline case-list">
+                                    <li>
+                                        <a href="https://www.nio.cn/" target="_blank" title="NIO">
+                                            <img src="Editor.md%20-%20Open%20source%20online%20Markdown%20editor_files/nio.png" alt="NIO">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="http://edn.egret.com/cn/" target="_blank" title="Egret HTML5 Game Engine">
+                                            <img src="Editor.md%20-%20Open%20source%20online%20Markdown%20editor_files/egret-engine.jpg" alt="Egret HTML5 Game Engine">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="http://bbs.pkbigdata.com/" target="_blank" title="DataCastle">
+                                            <img src="Editor.md%20-%20Open%20source%20online%20Markdown%20editor_files/datacastle.jpg" alt="DataCastle">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.showdoc.cc/" target="_blank" title="ShowDoc：一个非常适合IT团队的在线API文档、技术文档工具">
+                                            <img src="Editor.md%20-%20Open%20source%20online%20Markdown%20editor_files/showdoc.png" alt="ShowDoc">
+                                        </a>
+                                    </li>     
+                                </ul>
+                                <br>
+                                <p class="pui-text-center"><a href="mailto:editor.md@ipandao.com" class="pui-text-blue"><i class="fa fa-envelope-o"></i> Contact Us:</a> editor.md@ipandao.com</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="pui-hr pui-layout-fixed pui-layout-fixed-1200">
+            <footer class="pui-layout pui-layout-fixed pui-layout-fixed-1200 page-footer pui-clear">
+                <h1 class="pui-text-lg pui-right pui-text-center">
+                    <p>
+                        <img src="Editor.md%20-%20Open%20source%20online%20Markdown%20editor_files/editormd-logo-64x64.png">
+                        <span class="pui-block pui-text-gray pui-text-normal">Editor.md</span>
+                    </p>
+                </h1>
+                <p>Copyright © 2015-2019 <a href="https://github.com/pandao/editor.md" class="pui-link" target="_blank">Editor.md</a>, <a href="https://github.com/pandao/editor.md/blob/master/LICENSE" class="pui-link" target="_blank">MIT license.</a></p>
+                <p>Design &amp; Develop By: <a href="https://github.com/pandao" class="pui-link" target="_blank">Pandao</a>
+                 <a href="https://github.com/pandao" target="_blank"><i class="fa fa-github fa-lg"></i></a>
+                 <a href="https://twitter.com/ipandao" target="_blank"><i class="fa fa-twitter fa-lg pui-text-blue"></i></a>
+                 <a href="http://weibo.com/ipandao" target="_blank"><i class="fa fa-weibo fa-lg pui-text-red"></i></a>&nbsp;&nbsp; 
+                 <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1254310986'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/stat.php%3Fid%3D1254310986%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script><span id="cnzz_stat_icon_1254310986"></span><script src="Editor.md%20-%20Open%20source%20online%20Markdown%20editor_files/stat.php" type="text/javascript"></script>
+                </p>
+            </footer>
+        </div>
+        
+        <script src="Editor.md%20-%20Open%20source%20online%20Markdown%20editor_files/jquery.min.js"></script>
+
+        <!--[if lt IE 9]>
+        <script type="text/javascript" src="https://pandao.github.io/dist/js/planeui.patch.ie8.min.js"></script>
+        <![endif]-->
+
+        <!--[if lt IE 10]>
+        <script type="text/javascript" src="https://pandao.github.io/dist/js/planeui.patch.ie9.min.js"></script>
+        <![endif]-->
+
+        <script type="text/javascript" src="Editor.md%20-%20Open%20source%20online%20Markdown%20editor_files/planeui.js"></script>
+        <script src="Editor.md%20-%20Open%20source%20online%20Markdown%20editor_files/editormd.min.js"></script>   
+        <script src="Editor.md%20-%20Open%20source%20online%20Markdown%20editor_files/clipboard.min.js"></script>
+        <script src="Editor.md%20-%20Open%20source%20online%20Markdown%20editor_files/en.js"></script>
+        <script src="Editor.md%20-%20Open%20source%20online%20Markdown%20editor_files/index-en.js"></script>
+    
+
+<i title="Raphaël Colour Picker" style="display: none; color: white;"></i></body></html>

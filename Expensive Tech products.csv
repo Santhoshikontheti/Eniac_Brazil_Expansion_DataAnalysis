@@ -1,0 +1,4 @@
+COUNT(oi.product_id),SUM(oi.price),price_range
+9896,982198.3857293129,Others
+846,767983.9011230469,HighTech
+6,3000,Cheap

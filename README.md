@@ -8,11 +8,12 @@ Eniac, an online marketplace specializing in Apple-compatible accessories, is co
 
 #### However there are two main concerns:
 ####  1.Product Compatibility:               
-    Eniac's current catalog is 100% tech products, heavily based on Apple-compatible accessories.
-    It's not clear if Magist is a suitable partner for high-end tech products.
+Eniac's current catalog is 100% tech products, heavily based on Apple-compatible accessories.
+It's not clear if Magist is a suitable partner for high-end tech products.
 #### 2.Delivery Speed:
    Among Eniac's priorities for customer satisfaction, fast deliveries are crucial.
-  The delivery fees resulting from Magist's deal with the public Post Office might be cost-effective, but there's uncertainty about the speed of deliveries.
+   The delivery fees resulting from Magist's deal with the public Post Office might be cost-effective,    
+   but there's uncertainty about the speed of deliveries.
 
 ### Data Insights:
 
@@ -20,7 +21,8 @@ Eniac, an online marketplace specializing in Apple-compatible accessories, is co
 Through data analysis using SQL and Tableau, several insights have been uncovered:
 
   -  #### Expertise and Experience  with High-End Tech Products: 
-          Only 14.67% of Magist's products are tech-related, and the average price of these products is $120.5. Out of 32,951 products sold by Magist, only 3,390 are tech products.
+          Only 14.67% of Magist's products are tech-related, and the average price of these products is $120.5. 
+          Out of 32,951 products sold by Magist, only 3,390 are tech products.
           Magist has limited expertise and experience with high-end tech products.Out of 15,798 products, only 175 are considered expensive.
 -    #### Magist's Average & Estimated Delivery Time: 
           The average delivery time for Magist is 12.5 days.Comparision with Apple Store: Apple Store offers delivery within 1 to 7 business days.

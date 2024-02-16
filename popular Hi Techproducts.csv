@@ -1,3 +1,0 @@
-COUNT(oi.product_id),SUM(oi.price),price_range
-12491,1048620.566854,Others
-457,462198.8595275879,HighTech

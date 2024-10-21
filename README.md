@@ -14,6 +14,8 @@ It's not clear if Magist is a suitable partner for high-end tech products.
    Among Eniac's priorities for customer satisfaction, fast deliveries are crucial.
    The delivery fees resulting from Magist's deal with the public Post Office might be cost-effective,    
    but there's uncertainty about the speed of deliveries.
+   
+   ![image](https://github.com/user-attachments/assets/a5515334-3989-4989-b147-61d432a2f766)
 
 ### Data Insights:
 
@@ -24,11 +26,29 @@ Through data analysis using SQL and Tableau, several insights have been uncovere
           Only 14.67% of Magist's products are tech-related, and the average price of these products is $120.5. 
           Out of 32,951 products sold by Magist, only 3,390 are tech products.
           Magist has limited expertise and experience with high-end tech products.Out of 15,798 products, only 175 are considered expensive.
+
+     ![image](https://github.com/user-attachments/assets/99f6ebcc-91de-4778-bd84-7df8c63f8353)
+
+     ![image](https://github.com/user-attachments/assets/04598724-c658-42c8-ab6f-c3dbf08380d4)
+
+
 -    #### Magist's Average & Estimated Delivery Time: 
           The average delivery time for Magist is 12.5 days.Comparision with Apple Store: Apple Store offers delivery within 1 to 7 business days.
           Magist has an estimated delivery time of up to 140 days, but orders are often delivered earlier.
+
+
+     ![image](https://github.com/user-attachments/assets/d90b6e41-ff3f-4fdc-9556-23c92aa6f00b)
+
+     
+
 -    #### Magist's Tech-Oriented Revenue:
           Magist's revenue from tech products is $40,000.
+
+     ![image](https://github.com/user-attachments/assets/d99a5b5c-4d54-49b6-9047-c85a5765fb2b)
+
+   
+
+
 
 
  ### Repository Structure
@@ -49,6 +69,9 @@ Through data analysis using SQL and Tableau, several insights have been uncovere
 ### Results and Recommendations
 
 The final analysis and recommendations will be documented in a detailed report. Based on the insights gained, we will provide a conclusive answer to the question of whether Magist is a suitable partner for Eniac's expansion into the Brazilian market.
+
+![image](https://github.com/user-attachments/assets/1e8171ba-2fcc-4555-bd0d-4a96b6b61b26)
+
 
 #### Contributors:   
    Santhoshi,Xen and Vijayapriya
